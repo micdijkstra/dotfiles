@@ -35,6 +35,16 @@ You can safely run `rcup` multiple times to update:
 
     rcup
 
+Setup symlinks to the local custom configuration.
+
+ln -s gitconfig.local ~/.gitconfig.local
+ln -s gvimrc.local ~/.gvimrc.local
+ln -s tmux.conf.local ~/.tmux.conf.local
+ln -s vimrc.local ~/.vimrc.local
+ln -s vimrc.bundles.local ~/.vimrc.bundles.local
+ln -s zshrc.local ~/.zshrc.local
+
+
 Make your own customizations
 ----------------------------
 

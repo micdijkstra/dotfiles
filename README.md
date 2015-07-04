@@ -180,7 +180,7 @@ configuration:
 
 * Improve color resolution.
 * Remove administrative debris (session name, hostname, time) in status bar.
-* Set prefix to `Ctrl+a` (like GNU screen).
+* Set prefix to `Ctrl+s`
 * Soften status bar color from harsh green to light gray.
 
 [git](http://git-scm.com/) configuration:

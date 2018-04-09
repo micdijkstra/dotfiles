@@ -46,3 +46,10 @@ _load_settings "$HOME/.zsh/configs"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+export PATH="/usr/local/opt/elasticsearch@5.6/bin:$PATH"

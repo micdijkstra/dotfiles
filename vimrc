@@ -1,6 +1,7 @@
-" Leader
+" Leader is space key
 let mapleader = " "
 
+set mouse=n       " Disable mouse
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -11,26 +12,47 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+set rnu           " Relative line numbers
+set cursorline
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+" Switch syntax highlighting on
+" Also switch on highlighting the last used search pattern
+syntax on
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
 
+" Do I need these?
+let g:has_async = v:version >= 800 || has('nvim')
 filetype plugin indent on
+
+call plug#begin('~/.vim/bundle')
+
+Plug 'https://github.com/adelarsq/vim-matchit'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'janko-m/vim-test'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'w0rp/ale'
+Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sheerun/vim-polyglot'
+Plug 'Rigellute/rigel'
+Plug 'haishanh/night-owl.vim'
+Plug 'SirVer/ultisnips'
+
+call plug#end()
 
 augroup vimrcEx
   autocmd!
+
+  " Create directory on save
+  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
@@ -49,18 +71,14 @@ augroup vimrcEx
   if g:has_async
     set updatetime=1000
     let g:ale_lint_on_text_changed = 0
-    autocmd CursorHold * call ale#Lint()
-    autocmd CursorHoldI * call ale#Lint()
-    autocmd InsertEnter * call ale#Lint()
-    autocmd InsertLeave * call ale#Lint()
+    autocmd CursorHold * call ale#Queue(0)
+    autocmd CursorHoldI * call ale#Queue(0)
+    autocmd InsertEnter * call ale#Queue(0)
+    autocmd InsertLeave * call ale#Queue(0)
   else
     echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
 augroup END
-
-" When the type of shell script is /bin/sh, assume a POSIX-compatible
-" shell for syntax highlighting purposes.
-let g:is_posix = 1
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -91,8 +109,8 @@ if executable('ag')
   endif
 endif
 
-" Make it obvious where 80 characters is
-set textwidth=80
+" Make it obvious where 120 characters is
+set textwidth=120
 set colorcolumn=+1
 
 " Numbers
@@ -133,6 +151,8 @@ nnoremap <silent> <Leader>gt :TestVisit<CR>
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
 
+set tags=tags,./tags
+
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -160,7 +180,62 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
+let g:ale_linters_explicit = 1
+let g:ale_fixers_explicit = 1
+let g:ale_linters = { 'json': ['prettier'], 'javascript': ['prettier', 'eslint'],'typescript': ['tsserver'], 'ruby': ['standardrb', 'prettier'], 'markdown': ['prettier'], 'markdown.mdx': ['prettier', 'eslint'], 'html': ['prettier']  }
+let g:ale_fixers = { 'json': ['prettier'], 'javascript': ['prettier'],'typescript': ['tslint', 'prettier'], 'ruby': ['prettier'], 'markdown': ['prettier'], 'markdown.mdx': ['prettier'], 'html': ['prettier'] }
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_completion_tsserver_autoimport = 1
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+"let g:ale_sign_error = '🔥'
+"let g:ale_sign_warning = '⚠'
+"let g:ale_sign_column_always = 1
+
+let test#strategy = "dispatch"
+let g:dispatch_quickfix_height = 20
+
+"Search for visually selected text
+vnoremap // y/<C-R>"<CR>"
+
+nnoremap <esc> :noh<return><esc>
+hi clear SpellBad
+hi SpellBad cterm=underline
+
+set hlsearch
+"hi Search ctermbg=White
+"hi Search ctermfg=Magenta
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>"
+nnoremap \ :Ag<SPACE>
+
+" Better split mapping
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+let g:AutoPairsFlyMode = 0
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '|':'|'}
+
+" Autocomplete
+set complete=.,b,u,]
+set wildmode=longest,list:longest
+set completeopt=menu,preview
+
+"Open quicklist in existing tab if already open, or new tab
+set switchbuf+=usetab,newtab
+
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsListSnippets="<C-Space>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
+" Enable theme
+set termguicolors
+syntax enable
+colorscheme rigel

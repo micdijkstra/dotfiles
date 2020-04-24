@@ -1,0 +1,25 @@
+tmux-session() {
+  if [[ $# -lt 1 ]]; then
+    echo "Please specify a session to load."
+    exit 1
+  else
+    session=$1
+  fi
+
+  tmux=$(which tmux)
+
+  # Check if there's already a session running
+  $tmux has-session -t $session 2> /dev/null
+
+  # tmux has-session returns 0 if the session exists
+  if [[ $? != 0 ]]; then
+    # start tmux quietly and create a new session named the session and run the
+    # commands in the given session file.
+    $tmux -q new-session -A -d -s $session ' exit' \; \
+      source-file ~/.tmux.conf \; \
+      source-file ~/.tmux/sessions/$session
+  fi
+
+  # attach to the session
+  $tmux attach-session -t $session
+}

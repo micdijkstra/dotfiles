@@ -41,9 +41,6 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
-# Local config
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
@@ -67,3 +64,5 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 #export LDFLAGS="-L/usr/local/opt/zlib/lib"
 #export CPPFLAGS="-I/usr/local/opt/zlib/include"
 #export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+#
+export TERM="screen-256color"

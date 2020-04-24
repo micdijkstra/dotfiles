@@ -17,3 +17,25 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
+
+# Custom
+alias ga="git add . && git add -u"
+alias gac="git add . && git add -u && git ci"
+alias gr="git rebase -i master"
+alias gp="git push"
+alias gc="git ci"
+alias pr="hub pull-request"
+alias powr="touch ~/.pow/restart.txt"
+alias dc="docker-compose"
+alias venv="export WORKON_HOME=$HOME/.virtualenvs; export PROJECT_HOME=$HOME/Devel; source /usr/local/bin/virtualenvwrapper.sh"
+alias redis="redis-server /usr/local/etc/redis.conf"
+alias dstopall="docker stop $(docker ps -a -q)"
+alias dremoveall="docker rm $(docker ps -a -q)"
+alias ci="ctags -R ."
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="\vim"
+alias exportcalibre="export CALIBRE_API_TOKEN=31bbe047d3b2b070a4ef095efc711675b560044a97e4bd83f384e42bbff4443b"
+alias am-start="sudo apachectl start && mysql.server start"
+alias am-stop="sudo apachectl stop && mysql.server stop"
+alias ch="heroku run rails c -a calibreapp"

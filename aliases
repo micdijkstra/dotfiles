@@ -20,6 +20,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Custom
 alias ga="git add . && git add -u"
+alias gb="git branches"
 alias gac="git add . && git add -u && git ci"
 alias gr="git rebase -i master"
 alias gp="git push"

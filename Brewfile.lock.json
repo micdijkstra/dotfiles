@@ -613,7 +613,28 @@
       },
       "github/gh/gh": null,
       "heroku/brew/heroku": null,
-      "thoughtbot/formulae/rcm": null
+      "thoughtbot/formulae/rcm": null,
+      "tmuxinator": {
+        "version": "1.1.5",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/tmuxinator-1.1.5.catalina.bottle.tar.gz",
+              "sha256": "5fd15de59781df24bf798816624caade7b0d952be074b0327c59d9287425c738"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/tmuxinator-1.1.5.mojave.bottle.tar.gz",
+              "sha256": "9cb565c830d9a515b88fc12fd420d1c38b30d917b728d44dc3277058d228ed85"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/tmuxinator-1.1.5.high_sierra.bottle.tar.gz",
+              "sha256": "eb0b8d6cf7fd0f28107c5a9e09115d78415389670d667b7d1a7f0096425d8c62"
+            }
+          }
+        }
+      }
     },
     "cask": {
       "alacritty": {

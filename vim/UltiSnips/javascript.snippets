@@ -1,0 +1,56 @@
+snippet rc 
+import React from 'react'
+
+const $1 = (props) => (
+	$0
+)
+
+export default $1
+endsnippet
+
+snippet im
+import $1 from '$2'
+endsnippet
+
+snippet ir
+import React from 'react'
+endsnippet
+
+snippet ip
+import PropTypes from 'prop-types'
+endsnippet
+
+snippet is
+import styled from 'styled-components'
+endsnippet
+
+snippet sp
+${({ $1 }) => $1$0}
+endsnippet
+
+snippet co
+console.log($1)
+endsnippet
+
+snippet esi
+//eslint-disable-next-line
+endsnippet
+
+snippet cl
+//eslint-disable-next-line
+console.log($1)
+endsnippet
+
+snippet sc
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { withKnobs, text } from '@storybook/addon-knobs'
+
+import $1 from './'
+
+storiesOf('$1', module)
+	.addDecorator(withKnobs)
+	.add('$1', () => (
+		<$1 $2={text('$2', '$1 $2')} />
+	))
+endsnippet

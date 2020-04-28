@@ -3,7 +3,7 @@ PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 
 # load ASDF, falling back to rbenv if not available
 if [ -d "$HOME/.asdf" ]; then
-  . $HOME/.asdf/asdf.sh
+  . $(brew --prefix asdf)/asdf.sh
 elif command -v rbenv >/dev/null; then
   if [ -z $SILENCE_RBENV_DEPRECATION ]; then
     echo "The thoughtbot dotfiles have deprecated the use of rbenv in favor"\

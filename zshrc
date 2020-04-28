@@ -44,21 +44,23 @@ _load_settings "$HOME/.zsh/configs"
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-. $HOME/.asdf/asdf.sh
+. $(brew --prefix asdf)/asdf.sh
 
-. $HOME/.asdf/completions/asdf.bash
+#. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/completions/asdf.bash
+
 #export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 #export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 #export PATH="/usr/local/opt/elasticsearch@5.6/bin:$PATH"
 #export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 
-export ASDFROOT=$HOME/.asdf
-export ASDFINSTALLS=$HOME/.asdf/installs
-export GOPATH=$HOME/code/go
-GOV=$(asdf current golang | sed  's/ (set by .*)//g')
-export GOROOT=$ASDFINSTALLS/golang/1.12.9/go/
+#export ASDFROOT=$HOME/.asdf
+#export ASDFINSTALLS=$HOME/.asdf/installs
+#export GOPATH=$HOME/code/go
+#GOV=$(asdf current golang | sed  's/ (set by .*)//g')
+#export GOROOT=$ASDFINSTALLS/golang/1.12.9/go/
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Required for building python with asdf
 #export LDFLAGS="-L/usr/local/opt/zlib/lib"

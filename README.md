@@ -18,9 +18,9 @@ Install [homebrew](https://brew.sh/):
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-Brew bunndle:
+Brew bundle:
 
-    brew bundnle
+    brew bundle
 
 Install the dotfiles:
 
@@ -28,5 +28,5 @@ Install the dotfiles:
 
 ## Other programs to install
 
-- Alfred (Power pack)
+- [Alfred](https://www.alfredapp.com/)
 - Magnet (App Store)

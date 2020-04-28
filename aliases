@@ -40,3 +40,4 @@ alias exportcalibre="export CALIBRE_API_TOKEN=31bbe047d3b2b070a4ef095efc711675b5
 alias am-start="sudo apachectl start && mysql.server start"
 alias am-stop="sudo apachectl stop && mysql.server stop"
 alias ch="heroku run rails c -a calibreapp"
+alias mux="tmuxinator"

@@ -68,6 +68,9 @@ window:
   # Window class (Linux only):
   #class: Alacritty
 
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -201,7 +204,7 @@ colors:
 
   cursor:
     text: "0x002635"
-    cursor: "0xffcc1b"
+    cursor: "0x00cccc"
 
   indexed_colors: []
 
@@ -226,7 +229,7 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
@@ -295,9 +298,6 @@ selection:
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
 
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
-
 cursor:
   # Cursor style
   #
@@ -309,7 +309,7 @@ cursor:
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-  unfocused_hollow: true
+  unfocused_hollow: false
 
 # Live config reload (changes require restart)
 live_config_reload: true

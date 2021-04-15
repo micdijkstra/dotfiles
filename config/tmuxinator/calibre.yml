@@ -47,16 +47,19 @@ windows:
           - cd app
         - webpack:
           - cd app
-          - yarn dev-server
+          - npm run dev-server
   - server:
       layout: main-vertical
       panes:
         - app:
           - cd app
           - bundle exec rails s
-        - worker:
+        - queue_classic:
           - cd app
-          - QC_MEASURE="true" QUEUES="priority_analyse,analyse,notifications,background,postprocess" bundle exec rake qc:work
+          - QC_MEASURE="true" QUEUES="test_execution,priority_analyse,analyse,notifications,background,postprocess" bundle exec rake qc:work
+        - shoryuken:
+          - cd app
+          - bundle exec dotenv shoryuken -R -C config/shoryuken.yml -r ./app/workers/test_results_worker.rb
   - reporter:
       layout: main-vertical
       panes:
@@ -67,4 +70,22 @@ windows:
           - npm run watch
         - tests:
           - cd reporter
-          - npm run test -- --watch
+          - NEW_RELIC_ENABLED=false npm run test -- --watch
+  - agent:
+      layout: main-vertical
+      panes:
+        - editor:
+          - cd agent
+        - typescript:
+          - cd agent
+          - npm run watch
+        - agent:
+          - cd agent
+          - node index.js
+  - web:
+      layout: main-vertical
+      panes:
+        - editor:
+          - cd web
+        - server:
+          - cd web

@@ -145,11 +145,19 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " vim-test mappings
+if exists('g:vscode')
+nnoremap <silent> <Leader>t <Cmd>call VSCodeNotify('extension.runFileOnRspec')<CR>
+nnoremap <silent> <Leader>s <Cmd>call VSCodeNotify('extension.runLineOnRspec')<CR>
+nnoremap <silent> <Leader>l <Cmd>call VSCodeNotify('extension.runOnLastSpec')<CR>
+nnoremap <silent> <Leader>a <Cmd>call VSCodeNotify('extension.runOpenSpec')<CR>
+nnoremap <silent> <Leader>gt <Cmd>call VSCodeNotify('extension.runOpenSpec')<CR>
+else
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
+endif
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
@@ -187,6 +195,7 @@ let g:ale_linters_explicit = 1
 let g:ale_fixers_explicit = 1
 let g:ale_linters = { 'json': ['prettier'], 'javascript': ['prettier', 'eslint'],'typescript': ['tsserver'], 'ruby': ['standardrb', 'prettier'], 'markdown': ['prettier'], 'markdown.mdx': ['prettier', 'eslint'], 'html': ['prettier']  }
 let g:ale_fixers = { 'json': ['prettier'], 'javascript': ['prettier'],'typescript': ['tslint', 'prettier'], 'ruby': ['prettier'], 'markdown': ['prettier'], 'markdown.mdx': ['prettier'], 'html': ['prettier'] }
+let g:ale_linter_aliases = {'tsx': 'typescript'}
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_completion_tsserver_autoimport = 1
 let g:ale_completion_enabled = 1
@@ -212,7 +221,9 @@ set hlsearch
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>"
+if !exists('g:vscode')
 nnoremap \ :Ag<SPACE>
+endif
 
 " Better split mapping
 nnoremap <C-J> <C-W><C-J>
